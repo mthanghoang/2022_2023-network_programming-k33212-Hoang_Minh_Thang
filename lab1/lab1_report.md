@@ -17,21 +17,80 @@ Date finished:
 ### 1. Развертывание виртуальной машины Ubuntu на платформе Яндекс Облако.
 Можно посмотреть обзор информации о виртуальной машины по [ссылке](https://user-images.githubusercontent.com/61542577/191607858-f84b6882-d0de-4f81-bff8-fba97322245b.png)
 ### 2. Установка системы контроля конфигураций Ansible на виртуальной машине.
-* Обновление операционной системы с помощью команд:
-```
+* **Обновление операционной системы с помощью команд:**
+```bash
 sudo apt update
 sudo apt upgrade
 ```
-* Установление python3 и Ansible
-```
+* **Установление python3 и Ansible**
+```bash
 sudo apt install python3-pip
 sudo pip3 install ansible
 ```
 ### 3. Установка CHR на VirtualBox
-* Загрузка VDI файл на <https://mikrotik.com>
-* Установка CHR на VirtualBox с помощью загруженного файла
+* **Загрузка VDI файл на <https://mikrotik.com>**
+* **Установка CHR на VirtualBox с помощью загруженного файла**
 ### 4. Создание Wireguard сервера на машине Ubuntu (далее - VPN сервер)
-* Установка Wireguard
-```
+* **Установка Wireguard**
+```bash
 sudo apt install wireguard
 ```
+* **Далее необходимо сгенерировать пару закрытого и открытого ключей для сервера**
+> Закрытый ключ сгенирирован и скопирован в файл /etc/wireguard/private.key
+```bash
+wg genkey | sudo tee /etc/wireguard/private.key
+```
+> Соответственный открытый ключ получен из закрытого ключа и скопирован в файл /etc/wireguard/public.key
+```bash
+sudo cat /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
+```
+* **Конфигурация Wireguard сервера**
+> Создание файла конфигурации для сервера
+```bash
+sudo nano /etc/wireguard/wg0.conf
+```
+> Теперь необходимо выбрать диапазон адресов для сервера и клиента. В данной работе были выбраны адресы из диапазон 10.8.0.0/30.  
+  Номер прослушивания (Listen Port) - 51820, что является значением по умолчанию для Wireguard сервера.  
+  После определения IP адреса и номера прослушивания необходимо внести изменения в файл конфигураций /etc/wireguard/wg0.conf
+  
+```
+[Interface]
+Address = 10.8.0.1/30
+ListenPort = 51820
+PrivateKey = INPDG1SdQjqBMtQ01cTmLTFKqsMkJVra6DwnxbvPLEw=
+SaveConfig = true
+```
+> **PrivateKey** - закрытый ключ сервера, который мы скопировали в файл /etc/wireguard/private.key.  
+> Строка **SaveConfig** гарантирует, что при выключении интерфейса WireGuard любые изменения будут сохранены в файле конфигурации.
+* **Запуск сервера Wireguard**
+> Необходимо включить интерфейс при перезагрузке и запускать его.
+```bash
+sudo systemctl enable wg-quick@wg0
+sudo systemctl start wg-quick@wg0
+```
+### 5. Настройка Wireguard клиента на RouterOS
+* **Добавление нового интерфейса Wireguard и назначение ему IP-адреса 10.8.0.2/30**
+```mikrotik
+[admin@Mikrotik] > interface/wireguard name=wg0
+[admin@Mikrotik] > ip/address add address=10.8.0.2/30 interface=wg0
+```
+> При этом пара закрытого и открытого ключа будет автоматически сгенерирована, их можно посмотреть с помощью команды:
+```
+[admin@Mikrotik] > interface/wireguard print
+```
+* **Далее необходимо добавить Wireguard пир, указав нужные параметры сервера.**
+```
+[admin@Mikrotik] > interface/wireguard/peers add public-key="j4MFO922JTRyx3JCfVTy8OGiJaBirh/90d2s6nwdLn4=" allowed-address=10.8.0.1/32 endpoint-address=130.193.36.157 endpoint-port=51820 interface=wg0
+```
+> **public-key** - открытый ключ сервера  
+> **allowed-address** - разрешеный адрес через Wireguard туннель  
+> **endpoint-address** - публичный IP-адрес сервера  
+> **endpoint-port** - номер порта прослушивания сервера
+> **interface** - Wireguard интерфейс на RouterOS
+* **Добавление открытого ключа Wireguard клинета на Wireguard сервер**
+> 
+```bash
+sudo wg set wg0 peer 4C6ntaWzrJPNmsIyg5HsJxd5EGdb9FZ+9rQjmJMwqhU= allowed-ips 10.8.0.2
+```
+> Теперь Wireguard туннель между нашим VPN сервером на Ubuntu и VPN клиентом на RouterOS был настроен. При этом клиент должен инициировать соединение со сервером.
+
