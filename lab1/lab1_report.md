@@ -49,13 +49,13 @@ sudo cat /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public
 ```bash
 sudo nano /etc/wireguard/wg0.conf
 ```
-> Теперь необходимо выбрать диапазон адресов для сервера и клиента. В данной работе были выбраны адресы из диапазон 10.8.0.0/30.  
+> Теперь необходимо выбрать диапазон адресов для сервера и клиента. В данной работе были выбраны адресы из диапазон 10.8.0.0/24.  
   Номер прослушивания (Listen Port) - 51820, что является значением по умолчанию для Wireguard сервера.  
   После определения IP адреса и номера прослушивания необходимо внести изменения в файл конфигураций /etc/wireguard/wg0.conf
   
 ```
 [Interface]
-Address = 10.8.0.1/30
+Address = 10.8.0.1/24
 ListenPort = 51820
 PrivateKey = INPDG1SdQjqBMtQ01cTmLTFKqsMkJVra6DwnxbvPLEw=
 SaveConfig = true
@@ -72,7 +72,7 @@ sudo systemctl start wg-quick@wg0
 * **Добавление нового интерфейса Wireguard и назначение ему IP-адреса 10.8.0.2/30**
 ```mikrotik
 [admin@Mikrotik] > interface/wireguard name=wg0
-[admin@Mikrotik] > ip/address add address=10.8.0.2/30 interface=wg0
+[admin@Mikrotik] > ip/address add address=10.8.0.2/24 interface=wg0
 ```
 > При этом пара закрытого и открытого ключа будет автоматически сгенерирована, их можно посмотреть с помощью команды:
 ```
