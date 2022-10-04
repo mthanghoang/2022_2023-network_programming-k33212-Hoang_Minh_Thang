@@ -15,7 +15,9 @@ Date finished:
 3. Поднять VPN туннель между машиной Ubuntu и RouterOS
 ## ХОД РАБОТЫ:
 ### 1. Развертывание виртуальной машины Ubuntu на платформе Яндекс Облако.
-Можно посмотреть обзор информации о виртуальной машины по [ссылке](https://user-images.githubusercontent.com/61542577/191607858-f84b6882-d0de-4f81-bff8-fba97322245b.png)
+Можно посмотреть обзор информации о виртуальной машины
+![image](https://user-images.githubusercontent.com/61542577/193770134-312cdc1d-a188-4757-bc57-d1799a4bef43.png)
+
 ### 2. Установка системы контроля конфигураций Ansible на виртуальной машине.
 * **Обновление операционной системы с помощью команд:**
 ```bash
@@ -60,6 +62,8 @@ ListenPort = 51820
 PrivateKey = INPDG1SdQjqBMtQ01cTmLTFKqsMkJVra6DwnxbvPLEw=
 SaveConfig = true
 ```
+![image](https://user-images.githubusercontent.com/61542577/193769952-dce127cf-4e58-428f-9498-052e75ee089f.png)
+
 > **PrivateKey** - закрытый ключ сервера, который мы скопировали в файл /etc/wireguard/private.key.  
 > Строка **SaveConfig** гарантирует, что при выключении интерфейса WireGuard любые изменения будут сохранены в файле конфигурации.
 * **Запуск сервера Wireguard**
@@ -78,10 +82,18 @@ sudo systemctl start wg-quick@wg0
 ```
 [admin@Mikrotik] > interface/wireguard print
 ```
+![image](https://user-images.githubusercontent.com/61542577/193770500-723938a4-c735-4861-a2d7-9e4c01fafb7f.png)
+
 * **Далее необходимо добавить Wireguard пир, указав нужные параметры сервера.**
 ```
-[admin@Mikrotik] > interface/wireguard/peers add public-key="j4MFO922JTRyx3JCfVTy8OGiJaBirh/90d2s6nwdLn4=" allowed-address=10.8.0.1/32 endpoint-address=130.193.36.157 endpoint-port=51820 interface=wg0
+[admin@Mikrotik] > interface/wireguard/peers add public-key="j4MFO922JTRyx3JCfVTy8OGiJaBirh/90d2s6nwdLn4=" allowed-address=10.8.0.1/32 endpoint-address=178.154.202.203 endpoint-port=51820 interface=wg0
 ```
+После этого пир будет добавлен и информацию о пире можно посмотреть с помощью команды:
+```
+[admin@Mikrotik] > interface/wireguard/peers print detail
+```
+![image](https://user-images.githubusercontent.com/61542577/193771153-b484af06-8227-4b11-b2d8-681232d0478e.png)
+
 > **public-key** - открытый ключ сервера  
 > **allowed-address** - разрешеный адрес через Wireguard туннель  
 > **endpoint-address** - публичный IP-адрес сервера  
@@ -93,4 +105,5 @@ sudo systemctl start wg-quick@wg0
 sudo wg set wg0 peer 4C6ntaWzrJPNmsIyg5HsJxd5EGdb9FZ+9rQjmJMwqhU= allowed-ips 10.8.0.2
 ```
 > Теперь Wireguard туннель между нашим VPN сервером на Ubuntu и VPN клиентом на RouterOS был настроен. При этом клиент должен инициировать соединение со сервером.
+![image](https://user-images.githubusercontent.com/61542577/193771299-9f15ed78-d360-426e-bdda-475a93faf285.png)
 
