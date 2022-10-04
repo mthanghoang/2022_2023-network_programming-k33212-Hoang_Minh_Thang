@@ -71,7 +71,7 @@ sudo systemctl start wg-quick@wg0
 ### 5. Настройка Wireguard клиента на RouterOS
 * **Добавление нового интерфейса Wireguard и назначение ему IP-адреса 10.8.0.2/30**
 ```mikrotik
-[admin@Mikrotik] > interface/wireguard name=wg0
+[admin@Mikrotik] > interface/wireguard add name=wg0
 [admin@Mikrotik] > ip/address add address=10.8.0.2/24 interface=wg0
 ```
 > При этом пара закрытого и открытого ключа будет автоматически сгенерирована, их можно посмотреть с помощью команды:
