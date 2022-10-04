@@ -106,5 +106,6 @@ sudo wg set wg0 peer 4C6ntaWzrJPNmsIyg5HsJxd5EGdb9FZ+9rQjmJMwqhU= allowed-ips 10
 ```
 > Теперь Wireguard туннель между нашим VPN сервером на Ubuntu и VPN клиентом на RouterOS был настроен. При этом клиент должен инициировать соединение со сервером.
 ![image](https://user-images.githubusercontent.com/61542577/193772129-325b9090-ab52-412e-8b88-4bbba9f82796.png)
-
+## ВЫВОД:
+В ходе работы были изучены основные протоколы VPN и как настроить VPN туннель.
 
