@@ -6,7 +6,7 @@ Group: K34212
 Author: Hoang Minh Thang  
 Lab: Lab1  
 Date created: 21.09.2022  
-Date finished:
+Date finished: 11.10.2022
 # 
 
 ## ЦЕЛЬ РАБОТЫ:
