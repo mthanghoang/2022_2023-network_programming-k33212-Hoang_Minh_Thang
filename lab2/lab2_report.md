@@ -207,10 +207,12 @@ ansible-playbook -i ~/ansible/inventory ~/ansible/gather_facts.yml
 Схема связи
 ![image](https://user-images.githubusercontent.com/61542577/197304435-f3ef7581-8c5b-4275-aa46-78da26e9831c.png)
 
-Пинг между клиентом и сервером
+
+Пинг между клиентом и сервером 
 ![image](https://user-images.githubusercontent.com/61542577/197304545-e1227c58-4ec5-419c-9c83-e8465aa35ca7.png)
 
-Пинг между клиентами
+
+Пинг между клиентами 
 ![image](https://user-images.githubusercontent.com/61542577/197304591-77f40b4b-1006-4602-9f69-8b61e2131d86.png)
 
 * ****
