@@ -98,7 +98,7 @@ sudo systemctl start openvpn@server
 ![image](https://user-images.githubusercontent.com/61542577/196709278-d7accf29-a5c8-4aba-a9c2-b4a084edce84.png)
 ![image](https://user-images.githubusercontent.com/61542577/196709368-625a6dad-d25d-40d4-9c1c-d38e3d437c2b.png)
 
-Теперь OVPN туннель между нашим Ubuntu сервером и втором CHR был настроен.
+Теперь OVPN туннель между нашим Ubuntu сервером и CHR был настроен.
 ### 3. Используя Ansible, настроить на 2-х CHR:
 - Логин/пароль
 - NTP клиент
@@ -203,16 +203,20 @@ ansible-playbook -i ~/ansible/inventory ~/ansible/gather_facts.yml
 ![image](https://user-images.githubusercontent.com/61542577/197299313-a8ce38ee-22aa-4c23-a977-b2e9654ca96e.png)
 
 ### 4. Результат
-В результате у нас 2 файла с конфигурациями устройств conf1 и conf2.
+В результате у нас 2 файла с конфигурациями устройств conf1 и conf2. 
+
+
 Схема связи
+
+
 ![image](https://user-images.githubusercontent.com/61542577/197304435-f3ef7581-8c5b-4275-aa46-78da26e9831c.png)
 
-
 Пинг между клиентом и сервером 
+
+
 ![image](https://user-images.githubusercontent.com/61542577/197304545-e1227c58-4ec5-419c-9c83-e8465aa35ca7.png)
 
+Пинг между клиентами
 
-Пинг между клиентами 
 ![image](https://user-images.githubusercontent.com/61542577/197304591-77f40b4b-1006-4602-9f69-8b61e2131d86.png)
-
 * ****
