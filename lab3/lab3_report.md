@@ -6,7 +6,7 @@ Group: K34212
 Author: Hoang Minh Thang  
 Lab: Lab2  
 Date created: 21.10.2022  
-Date finished: 27.10.2022
+Date finished: 
 #
 ## Цель работы
 С помощью Ansible и Netbox собрать всю возможную информацию об устройствах и сохранить их в отдельном файле.
@@ -114,7 +114,7 @@ sudo systemctl restart nginx
 
 ![image](https://user-images.githubusercontent.com/61542577/203175591-f3e64fad-6441-43c0-afa7-29f2ae699be5.png)
 
-### 4. Используя Ansible все данные из Netbox в отдельный файл
+### 4. Используя Ansible сохранить все данные из Netbox в отдельный файл
 Файл Inventory
 ```
 [routers]
