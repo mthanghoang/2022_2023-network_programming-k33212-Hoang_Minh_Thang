@@ -98,6 +98,7 @@ make run
 ![image](https://user-images.githubusercontent.com/61542577/204066359-5f16d5f0-f6de-4a12-ab74-6b2d0e4372e3.png)
 
 **Реализовать базовое туннелирование**
+
 Добавлен новый тип заголовка myTunnel_t, который содержит два 16-битных поля: **proto_id** и **dst_id**.
 
 ![image](https://user-images.githubusercontent.com/61542577/204066467-2498979c-290f-4d8d-8758-e67ef8b6020e.png)
@@ -136,6 +137,7 @@ make run
 ![image](https://user-images.githubusercontent.com/61542577/204067235-bad97c8d-c4fa-44a4-85c9-3be49d2bbc1d.png)
 
 **Проверить решение**
+
 Сохранить файл p4 и заново скомпилировать программу.
 ```
 make build
