@@ -4,7 +4,7 @@ Course: [Network programming](https://github.com/itmo-ict-faculty/network-progra
 Year: 2022/2023  
 Group: K34212  
 Author: Hoang Minh Thang  
-Lab: Lab4
+Lab: Lab4  
 Date created: 26.10.2022  
 Date finished: 
 #
@@ -30,7 +30,7 @@ Date finished:
 ```
 cd ~/tutorials/exercises/basic
 ```
-Скомпилировать неполный файл basic.p4
+Скомпилировать неполный файл **basic.p4**
 ```
 make build
 make run
@@ -43,7 +43,7 @@ make run
 
 ![image](https://user-images.githubusercontent.com/61542577/204061862-3e954489-07d5-416e-9d3e-9bdab482c38b.png)
 
-Проверка связи не удалась, как ожидалось, потому что каждый коммутатор запрограммирован в соответствии с basic.p4, который отбрасывает все пакеты по прибытии.
+Проверка связи не удалась, как ожидалось, потому что каждый коммутатор запрограммирован в соответствии с файлом **basic.p4**, который отбрасывает все пакеты по прибытии.
 
 **Реализовать базовую переадресацию**
 
@@ -98,7 +98,7 @@ make run
 ![image](https://user-images.githubusercontent.com/61542577/204066359-5f16d5f0-f6de-4a12-ab74-6b2d0e4372e3.png)
 
 **Реализовать базовое туннелирование**
-Добавлен новый тип заголовка myTunnel_t, который содержит два 16-битных поля: proto_id и dst_id.
+Добавлен новый тип заголовка myTunnel_t, который содержит два 16-битных поля: **proto_id** и **dst_id**.
 
 ![image](https://user-images.githubusercontent.com/61542577/204066467-2498979c-290f-4d8d-8758-e67ef8b6020e.png)
 
@@ -108,20 +108,20 @@ make run
 
 ![image](https://user-images.githubusercontent.com/61542577/204066586-7a86a95a-b65f-44f1-8dfa-a6c22f218eb9.png)
 
-Обновлен парсер **parse_ethernet**, чтобы извлечь либо ipv4 заголовок, либо myTunnel заголовок в зависимости от значения поля etherType. Значение etherType, которое соответствует заголовку myTunnel, равен 0x1212. Это значение определено в самом начале файла.
+Обновлен парсер **parse_ethernet**, чтобы извлечь либо ipv4 заголовок, либо myTunnel заголовок в зависимости от значения поля **etherType**. Значение **etherType**, которое соответствует заголовку myTunnel, равен 0x1212. Это значение определено в самом начале файла.
 
 ![image](https://user-images.githubusercontent.com/61542577/204066759-b09df2fc-00b6-45a9-8c02-9e57d3abedb3.png)
 
 ![image](https://user-images.githubusercontent.com/61542577/204066772-1f1a3db2-36d8-4fec-863c-e090f5006e2e.png)
 
-Добавлена новая таблица myTunnel_exact, которая вызывает функцию **myTunnel_forward** при совпадении значения поля dst_id.
+Добавлена новая таблица **myTunnel_exact**, которая вызывает функцию **myTunnel_forward** при совпадении значения поля **dst_id**.
 Функция **myTunnel_forward** обновляет выходной порт для пакета. При этом таблица **myTunnel_exact** еще не заполнена. Заполнение таблицы будет описано позже.
 
 ![image](https://user-images.githubusercontent.com/61542577/204066941-056e17c0-517c-41d0-afdd-728965b2c1cd.png)
 
 ![image](https://user-images.githubusercontent.com/61542577/204066952-6216cf63-b061-4891-b0bf-f4e201271bda.png)
 
-Обновлена функция **apply()**, чтобы она могла вызывать и таблицу myTunnel_exact и таблицу ipv4_lpm при необходимости.
+Обновлена функция **apply()**, чтобы она могла вызывать либо таблицу **myTunnel_exact**, либо таблицу **ipv4_lpm** при необходимости.
 
 ![image](https://user-images.githubusercontent.com/61542577/204067074-96b94d8d-09c7-4087-919a-bcdf43e10695.png)
 
