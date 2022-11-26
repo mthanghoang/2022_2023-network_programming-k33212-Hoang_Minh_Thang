@@ -4,8 +4,8 @@ Course: [Network programming](https://github.com/itmo-ict-faculty/network-progra
 Year: 2022/2023  
 Group: K34212  
 Author: Hoang Minh Thang  
-Lab: Lab3  
-Date created: 21.10.2022  
+Lab: Lab4
+Date created: 26.10.2022  
 Date finished: 
 #
 ## ЦЕЛЬ РАБОТЫ
