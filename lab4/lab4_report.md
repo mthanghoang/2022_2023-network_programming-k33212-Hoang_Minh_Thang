@@ -99,17 +99,17 @@ make run
 
 **Реализовать базовое туннелирование**
 
-Добавлен новый тип заголовка myTunnel_t, который содержит два 16-битных поля: **proto_id** и **dst_id**.
+Добавлен новый тип заголовка **myTunnel_t**, который содержит два 16-битных поля: **proto_id** и **dst_id**.
 
 ![image](https://user-images.githubusercontent.com/61542577/204066467-2498979c-290f-4d8d-8758-e67ef8b6020e.png)
 
 ![image](https://user-images.githubusercontent.com/61542577/204066470-e773abdc-3484-4c63-8ecd-13ded6646dcb.png)
 
-Добавлен парсер **parse_myTunnel**, который извлекает myTunnel заголовок. Если значение поля **proto_id** равно 0x800 то следует переходить на парсер **parse_ipv4** 
+Добавлен парсер **parse_myTunnel**, который извлекает **myTunnel** заголовок. Если значение поля **proto_id** равно 0x800 то следует переходить на парсер **parse_ipv4** 
 
 ![image](https://user-images.githubusercontent.com/61542577/204066586-7a86a95a-b65f-44f1-8dfa-a6c22f218eb9.png)
 
-Обновлен парсер **parse_ethernet**, чтобы извлечь либо ipv4 заголовок, либо myTunnel заголовок в зависимости от значения поля **etherType**. Значение **etherType**, которое соответствует заголовку myTunnel, равен 0x1212. Это значение определено в самом начале файла.
+Обновлен парсер **parse_ethernet**, чтобы извлечь либо **ipv4** заголовок, либо **myTunnel** заголовок в зависимости от значения поля **etherType**. Значение **etherType**, которое соответствует заголовку **myTunnel**, равен 0x1212. Это значение определено в самом начале файла.
 
 ![image](https://user-images.githubusercontent.com/61542577/204066759-b09df2fc-00b6-45a9-8c02-9e57d3abedb3.png)
 
