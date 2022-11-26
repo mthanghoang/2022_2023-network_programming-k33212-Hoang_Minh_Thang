@@ -132,7 +132,7 @@ make run
 
 **Заполнить новую таблицу**
 
-На основе схемы задания заполнена таблица **myTunnel_exact**. Можно добавить записи в таблицу, редактировав файлы **s1-runtime.json**, **s2-runtime.json**, **s3-runtime.json**, которые соответствующие коммутаторам s1, s2, s3.
+На основе схемы задания заполнена таблица **myTunnel_exact**. Можно добавить записи в таблицу, редактировав файлы **s1-runtime.json**, **s2-runtime.json**, **s3-runtime.json**, соответствующие коммутаторам s1, s2, s3.
 
 ![image](https://user-images.githubusercontent.com/61542577/204067235-bad97c8d-c4fa-44a4-85c9-3be49d2bbc1d.png)
 
